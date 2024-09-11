@@ -8,9 +8,9 @@ RUN apk add --no-cache libffi-dev \
     && if [ "$(uname -m)" = "x86_64" ]; then ARCH=amd64; elif [ "$(uname -m)" = "aarch64" ]; then ARCH=arm64; fi \
     && curl https://dl.min.io/client/mc/release/linux-${ARCH}/mc --create-dirs -o /usr/bin/mc \
     && chmod +x /usr/bin/mc \
-    && pip install --upgrade pip setuptools wheel \
-    && pip install cython \
-    && pip install --break-system-packages -r https://raw.githubusercontent.com/iLay1678/nas-tools/v2.9.1/requirements.txt \
+    && pix install --upgrade pip setuptools wheel \
+    && pipx install cython \
+    && pipx install -r https://raw.githubusercontent.com/iLay1678/nas-tools/v2.9.1/requirements.txt \
     && apk del libffi-dev \
     && npm install pm2 -g \
     && rm -rf /tmp/* /root/.cache /var/cache/apk/*
