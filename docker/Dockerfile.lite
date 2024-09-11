@@ -1,26 +1,22 @@
-FROM alpine
+FROM python:3.10.11-alpine
 RUN apk add --no-cache libffi-dev  \
     git  \
     gcc  \
     musl-dev  \
-    python3-dev  \
-    py3-pip  \
     libxml2-dev  \
     libxslt-dev  \
     tzdata  \
     su-exec  \
     dumb-init  \
     npm \
-    pipx \
     && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo "${TZ}" > /etc/timezone \
-    && ln -sf /usr/bin/python3 /usr/bin/python \
-    && pipx install --upgrade pip setuptools wheel \
-    && pipx install cython \
-    && pipx install -r https://raw.githubusercontent.com/iLay1678/nas-tools/v2.9.1/requirements.txt \
+
+    && pip install --upgrade pip setuptools wheel \
+    && pip install cython \
+    && pip install -r https://raw.githubusercontent.com/iLay1678/nas-tools/v2.9.1/requirements.txt \
     && npm install pm2 -g \
-    && apk del --purge libffi-dev gcc musl-dev libxml2-dev libxslt-dev \
-    && pipx uninstall -y cython \
+    && apk del --purge libffi-dev gcc musl-dev libxml2-dev libxslt-dev \    && pip uninstall -y cython \
     && rm -rf /tmp/* /root/.cache /var/cache/apk/*
 ENV LANG="C.UTF-8" \
     TZ="Asia/Shanghai" \
