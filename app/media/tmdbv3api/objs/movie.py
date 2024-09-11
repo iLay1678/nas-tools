@@ -230,7 +230,7 @@ class Movie(TMDb):
         return self._get_obj(
             self._call(
                 self._urls["search_movie"],
-                "query=" + quote(term) + "&page=" + str(page),
+                "query=" + quote(term) + "&include_adult=true&page=" + str(page),
             )
         )
 
